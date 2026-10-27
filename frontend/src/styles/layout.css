@@ -21,22 +21,58 @@
    ========================================================================= */
 
 .layout {
+  max-width: 1200px;
+  margin: 0 auto;          /* Centrado horizontal */
+  padding: 1rem;           /* Margen interior */
+  display: grid;           /* Grid base (forma 1 columna en móvil) */
+  gap: 1.5rem;             /* Separación general */
 }
 
 .panel-form {
+  /* En móvil no requiere estilos adicionales (fluye como bloque) */
 }
 
 .panel-listado {
+  /* Contenedor fluido, le damos un gap interno para separar barra, lista y paginación */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .barra-listado {
+  display: flex;
+  justify-content: space-between; /* Elementos a los extremos */
+  align-items: center;            /* Centrados verticalmente */
+  flex-wrap: wrap;                /* Pasa a dos líneas si no cabe */
+  gap: 1rem;                      /* Espaciado si hace wrap */
 }
 
 .lista-equipos {
+  list-style: none;        /* Sin viñetas */
+  margin: 0;               /* Sin margen por omisión */
+  padding: 0;              /* Sin relleno por omisión */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Columnas dinámicas */
+  gap: 1rem;               /* Separación entre tarjetas de equipos */
 }
 
 .paginacion {
+  display: flex;
+  justify-content: space-between; /* Elementos a los extremos */
+  align-items: center;            /* Centrados verticalmente */
+  flex-wrap: wrap;                /* Previene desbordamiento en móviles (360px) */
+  gap: 1rem;
 }
 
+/* --- Breakpoint para Desktop (desde 900px) --- */
 @media (min-width: 900px) {
+  .layout {
+    grid-template-columns: 320px 1fr; /* Dos columnas: Form 320px, Lista resto (1fr) */
+  }
+
+  .panel-form {
+    position: sticky;
+    top: 1rem;             /* Necesario indicar la distancia desde arriba para que sticky funcione */
+    align-self: start;     /* Alineado al inicio de su celda (evita que se estire a lo alto) */
+  }
 }
