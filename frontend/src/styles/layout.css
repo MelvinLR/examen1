@@ -1,0 +1,42 @@
+/* =========================================================================
+   TODO [F5] Maquetación responsiva (mobile first)
+
+   Requisitos:
+   1. .layout
+      - Ancho máximo de 1200px, centrado, con margen interior de 1rem.
+      - En pantallas pequeñas: una sola columna (formulario arriba, listado abajo).
+      - Desde 900px: dos columnas con CSS Grid — formulario de 320px y listado
+        con el resto del espacio. Separación entre columnas de 1.5rem.
+   2. .panel-form
+      - Desde 900px debe quedarse fijo al desplazarse (position: sticky),
+        alineado al inicio de su celda.
+   3. .lista-equipos
+      - Sin viñetas, sin margen ni relleno por omisión.
+      - CSS Grid con tantas columnas como quepan, cada una de mínimo 220px
+        (sin media query: use auto-fill y minmax).
+   4. .barra-listado y .paginacion
+      - Flexbox: elementos en los extremos y centrados verticalmente.
+      - La barra puede pasar a dos líneas si no cabe.
+   5. Ningún elemento debe provocar desplazamiento horizontal a 360px de ancho.
+   ========================================================================= */
+
+.layout {
+}
+
+.panel-form {
+}
+
+.panel-listado {
+}
+
+.barra-listado {
+}
+
+.lista-equipos {
+}
+
+.paginacion {
+}
+
+@media (min-width: 900px) {
+}

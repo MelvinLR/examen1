@@ -1,0 +1,286 @@
+/* =========================================================================
+   YA IMPLEMENTADO — tokens, tipografía y componentes visuales.
+   La maquetación de la página está en layout.css (TODO [F5]).
+   ========================================================================= */
+
+:root {
+  --color-fondo: #f4f6f8;
+  --color-superficie: #ffffff;
+  --color-texto: #1d2733;
+  --color-texto-suave: #5b6878;
+  --color-borde: #d9e0e7;
+  --color-primario: #0077b6;
+  --color-primario-oscuro: #005a8a;
+  --color-acento: #00b4d8;
+  --color-peligro: #c0392b;
+  --color-exito: #1e8449;
+
+  --estado-disponible: #1e8449;
+  --estado-prestado: #b9770e;
+  --estado-mantenimiento: #7d3c98;
+
+  --radio: 10px;
+  --sombra: 0 1px 2px rgb(16 24 40 / 0.06), 0 1px 3px rgb(16 24 40 / 0.1);
+  --espacio: 1rem;
+  --fuente: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--fuente);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--color-texto);
+  background: var(--color-fondo);
+}
+
+h1, h2, h3 {
+  margin: 0;
+  line-height: 1.2;
+}
+
+h2 { font-size: 1.15rem; }
+h3 { font-size: 1rem; }
+
+[hidden] { display: none !important; }
+
+/* ---------- Encabezado ---------- */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--espacio);
+  padding: 0.75rem 1.25rem;
+  background: var(--color-superficie);
+  border-bottom: 3px solid var(--color-acento);
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.marca h1 { font-size: 1.2rem; }
+
+.marca-sigla {
+  display: grid;
+  place-items: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 8px;
+  background: var(--color-primario);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.sesion {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--color-texto-suave);
+  font-size: 0.9rem;
+}
+
+/* ---------- Tarjetas y paneles ---------- */
+.card {
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 1.25rem;
+}
+
+.tarjeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 1rem;
+}
+
+.tarjeta-cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tarjeta .codigo {
+  font-family: ui-monospace, "Cascadia Code", monospace;
+  font-size: 0.85rem;
+  color: var(--color-texto-suave);
+}
+
+.tarjeta .categoria,
+.tarjeta .fecha {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--color-texto-suave);
+}
+
+.tarjeta .btn-eliminar {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+.estado {
+  padding: 0.1rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: #fff;
+  background: var(--color-texto-suave);
+}
+
+.estado[data-estado="disponible"] { background: var(--estado-disponible); }
+.estado[data-estado="prestado"] { background: var(--estado-prestado); }
+.estado[data-estado="mantenimiento"] { background: var(--estado-mantenimiento); }
+
+.vacio {
+  padding: 2rem;
+  text-align: center;
+  color: var(--color-texto-suave);
+  border: 2px dashed var(--color-borde);
+  border-radius: var(--radio);
+}
+
+.lista-equipos[aria-busy="true"] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.resumen,
+.pagina-actual {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--color-texto-suave);
+}
+
+/* ---------- Formularios ---------- */
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.85rem;
+}
+
+label {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+input,
+select {
+  font: inherit;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--color-borde);
+  border-radius: 8px;
+  background: #fff;
+  color: inherit;
+}
+
+input:focus-visible,
+select:focus-visible,
+.btn:focus-visible {
+  outline: 3px solid var(--color-acento);
+  outline-offset: 1px;
+}
+
+[aria-invalid="true"] {
+  border-color: var(--color-peligro);
+  background: #fdf2f1;
+}
+
+.error-campo {
+  margin: 0;
+  min-height: 1.1em;
+  font-size: 0.8rem;
+  color: var(--color-peligro);
+}
+
+/* ---------- Botones ---------- */
+.btn {
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--color-borde);
+  border-radius: 8px;
+  background: var(--color-superficie);
+  color: var(--color-texto);
+  cursor: pointer;
+}
+
+.btn:hover:not(:disabled) { border-color: var(--color-primario); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.btn-primario {
+  background: var(--color-primario);
+  border-color: var(--color-primario);
+  color: #fff;
+  width: 100%;
+}
+
+.btn-primario:hover:not(:disabled) { background: var(--color-primario-oscuro); }
+
+.btn-peligro {
+  color: var(--color-peligro);
+  border-color: currentColor;
+  background: transparent;
+  font-size: 0.8rem;
+  padding: 0.3rem 0.7rem;
+}
+
+.btn-peligro:hover:not(:disabled) { background: var(--color-peligro); color: #fff; }
+
+.btn-fantasma { background: transparent; }
+
+/* ---------- Mensajes ---------- */
+.mensajes {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 10;
+  max-width: min(360px, calc(100vw - 2rem));
+}
+
+.mensaje {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  color: #fff;
+  box-shadow: var(--sombra);
+  font-size: 0.9rem;
+}
+
+.mensaje-exito { background: var(--color-exito); }
+.mensaje-error { background: var(--color-peligro); }
+.mensaje-info { background: var(--color-primario); }
+
+/* ---------- Inicio de sesión ---------- */
+.vista-login {
+  display: grid;
+  place-items: center;
+  padding: 3rem 1rem;
+}
+
+.form-login {
+  width: min(380px, 100%);
+}
+
+.form-login h2,
+.panel-form h2 { margin-bottom: 1rem; }

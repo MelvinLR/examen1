@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Control de préstamo de equipos del laboratorio" />
+    <title>Préstamo de Equipos · IF0009</title>
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="marca">
+        <span class="marca-sigla" aria-hidden="true">IF</span>
+        <h1>Préstamo de Equipos</h1>
+      </div>
+      <div class="sesion" id="sesion" hidden>
+        <span id="usuario-nombre"></span>
+        <button type="button" id="btn-salir" class="btn btn-fantasma">Cerrar sesión</button>
+      </div>
+    </header>
+
+    <div id="mensajes" class="mensajes" role="status" aria-live="polite"></div>
+
+    <!-- ===================== Vista de inicio de sesión (YA IMPLEMENTADA) ===================== -->
+    <section id="vista-login" class="vista-login" hidden>
+      <form id="form-login" class="card form-login" novalidate>
+        <h2>Iniciar sesión</h2>
+        <div class="campo">
+          <label for="login-email">Correo institucional</label>
+          <input id="login-email" name="email" type="email" autocomplete="username" required />
+          <p class="error-campo" data-error="email"></p>
+        </div>
+        <div class="campo">
+          <label for="login-password">Contraseña</label>
+          <input id="login-password" name="password" type="password" autocomplete="current-password" required />
+          <p class="error-campo" data-error="password"></p>
+        </div>
+        <button type="submit" class="btn btn-primario">Entrar</button>
+      </form>
+    </section>
+
+    <!-- ===================== Vista principal ===================== -->
+    <main id="vista-app" class="layout" hidden>
+      <aside class="panel-form card" aria-labelledby="titulo-form">
+        <h2 id="titulo-form">Registrar equipo</h2>
+
+        <form id="form-equipo" class="form-equipo" novalidate>
+          <div class="campo">
+            <label for="codigo">Código</label>
+            <input id="codigo" name="codigo" type="text" placeholder="EQ-0000" maxlength="20" required />
+            <p class="error-campo" data-error="codigo"></p>
+          </div>
+
+          <div class="campo">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" name="nombre" type="text" maxlength="120" required />
+            <p class="error-campo" data-error="nombre"></p>
+          </div>
+
+          <div class="campo">
+            <label for="categoria_id">Categoría</label>
+            <select id="categoria_id" name="categoria_id" required>
+              <option value="">Seleccione…</option>
+            </select>
+            <p class="error-campo" data-error="categoria_id"></p>
+          </div>
+
+          <div class="campo">
+            <label for="fecha_adquisicion">Fecha de adquisición</label>
+            <input id="fecha_adquisicion" name="fecha_adquisicion" type="date" required />
+            <p class="error-campo" data-error="fecha_adquisicion"></p>
+          </div>
+
+          <div class="campo">
+            <label for="costo_interno">Costo (₡)</label>
+            <input id="costo_interno" name="costo_interno" type="number" min="0" step="0.01" required />
+            <p class="error-campo" data-error="costo_interno"></p>
+          </div>
+
+          <button type="submit" id="btn-guardar" class="btn btn-primario">Guardar</button>
+        </form>
+      </aside>
+
+      <section class="panel-listado" aria-labelledby="titulo-listado">
+        <div class="barra-listado">
+          <h2 id="titulo-listado">Inventario</h2>
+          <p id="resumen" class="resumen"></p>
+        </div>
+
+        <ul id="lista-equipos" class="lista-equipos"></ul>
+
+        <nav class="paginacion" aria-label="Paginación del inventario">
+          <button type="button" id="btn-anterior" class="btn">← Anterior</button>
+          <span id="pagina-actual" class="pagina-actual"></span>
+          <button type="button" id="btn-siguiente" class="btn">Siguiente →</button>
+        </nav>
+      </section>
+    </main>
+
+    <!-- Plantilla de una tarjeta de equipo: clónela con template.content.cloneNode(true) -->
+    <template id="tpl-equipo">
+      <li class="tarjeta">
+        <div class="tarjeta-cabecera">
+          <span class="codigo"></span>
+          <span class="estado"></span>
+        </div>
+        <h3 class="nombre"></h3>
+        <p class="categoria"></p>
+        <p class="fecha"></p>
+        <button type="button" class="btn btn-peligro btn-eliminar">Eliminar</button>
+      </li>
+    </template>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
